@@ -57,7 +57,7 @@ public class CSVWriter {
 			writer.append(values[i].toString());
 			
 			if (i < values.length - 1) {
-				writer.append(",");
+				writer.append(";");
 			}
 		}
 		
