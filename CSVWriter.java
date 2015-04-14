@@ -9,13 +9,15 @@ public class CSVWriter {
 	
 	private boolean fileCreated = false;
 	
-	public CSVWriter (String fileName) {
+	public CSVWriter (String fileName) throws IOException {
 		this(fileName, null);
 	}
 	
-	public CSVWriter (String fileName, String columns[]) {
+	public CSVWriter (String fileName, String columns[]) throws IOException {
 		this.fileName = fileName;
 		this.columns = columns;
+		
+		this.generateFile(fileName);
 	}
 	
 	public String getFileName() {
@@ -35,6 +37,15 @@ public class CSVWriter {
 		if (values.length == this.columns.length || this.columns == null) {
 			this.writeRow(values);
 		}
+	}
+	
+	public void writeStringToFile(String values) throws IOException {
+		if (!fileCreated) {
+			generateFile(this.fileName);
+		}
+		
+		writer.append(values);
+		writer.append("\n");
 	}
 	
 	public void closeWriter() throws IOException {
